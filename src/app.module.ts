@@ -5,6 +5,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { User } from './user/user.entity';
+import { Auth } from './auth/auth.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -15,12 +17,12 @@ import { User } from './user/user.entity';
       username: config.default.user,
       password: config.default.password,
       database: config.default.schema,
-      entities: [User],
+      entities: [User, Auth],
       synchronize: true,
       dropSchema: false,
       keepConnectionAlive: true,
     }),
-    UserModule,
+    UserModule, AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
