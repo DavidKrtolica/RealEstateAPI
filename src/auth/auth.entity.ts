@@ -4,8 +4,9 @@ import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn, PrimaryGeneratedCo
 @Entity('auth')
 export class Auth {
   //ALSO A FOREIGN KEY AND PRIMARY KEY - EXACTLY THE SAME AS THE USER ID
+  //TEMPORARY SOLUTION WITH AUTO-GENERATED IDs
   @PrimaryGeneratedColumn({ name: 'auth_id' })
-  authId: Number
+  authId: Number;
   
   /* //RELATIONSHIP DEFINED
   @OneToOne(() => User) 
