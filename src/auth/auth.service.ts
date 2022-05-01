@@ -13,4 +13,8 @@ export class AuthService {
   async findAll(): Promise<Auth[]> {
     return await this.authRepository.find();
   }
+
+  async findOne(searchId: Number): Promise<Auth> {
+    return await this.authRepository.findOne({ where: { authId: searchId } });
+  }
 }

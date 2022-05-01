@@ -15,5 +15,4 @@ export class UserController {
   async getUserById(@Param('searchId') searchId: Number): Promise<User> {
     return await this.userService.findOne(searchId);
   }
-
 }

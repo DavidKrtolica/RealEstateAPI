@@ -34,5 +34,7 @@ export class User {
   @Column('int', { name: 'role_id' })
   roleId: Number;
 
-  //TO IMPLEMENT - FOREIGN KEY FOR AUTH TABLE ('auth_id - user_id' CONNECTION)
+  //FOREIGN KEY - RELATIONSHIP WITH EXISTING 'auth' ENTITY
+  @Column('int', { name: 'auth_id' })
+  authId: Number;
 }
