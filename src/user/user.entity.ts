@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Auth } from 'src/auth/auth.entity';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('user')
 export class User {
@@ -34,7 +35,10 @@ export class User {
   @Column('int', { name: 'role_id' })
   roleId: Number;
 
-  //FOREIGN KEY - RELATIONSHIP WITH EXISTING 'auth' ENTITY
+  //RELATIONSHIP WITH EXISTING 'auth' ENTITY
+  @OneToOne(type => Auth, { cascade: true, onDelete: 'CASCADE' }) @JoinColumn({ name: 'auth_id' })
+  auth: Auth;
+  //FOREIGN KEY COLUMN 'auth_id'
   @Column('int', { name: 'auth_id' })
   authId: Number;
 }
