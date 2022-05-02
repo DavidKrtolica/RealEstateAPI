@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query, Delete } from '@nestjs/common';
 import { Auth } from './auth.entity';
 import { AuthService } from './auth.service';
 
@@ -15,4 +15,10 @@ export class AuthController {
   async getAuthById(@Param('searchAuthId') searchAuthId: Number): Promise<Auth> {
     return await this.authService.findOne(searchAuthId);
   }
+
+  @Delete('auths/:deleteId')
+  async deleteAuthById(@Param('deleteId') deleteId: number): Promise<any> {
+    return await this.authService.delete(deleteId);
+  }
+
 }

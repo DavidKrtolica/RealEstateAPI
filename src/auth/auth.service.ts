@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { InsertValuesMissingError, Repository } from 'typeorm';
+import { InsertValuesMissingError, Repository, DeleteResult, FindConditions, ObjectID } from 'typeorm';
 import { Auth } from './auth.entity';
 
 @Injectable()
@@ -16,5 +16,9 @@ export class AuthService {
 
   async findOne(searchId: Number): Promise<Auth> {
     return await this.authRepository.findOne({ where: { authId: searchId } });
+  }
+
+  async delete(byId: number): Promise<DeleteResult> {
+    return await this.authRepository.delete(byId);
   }
 }
