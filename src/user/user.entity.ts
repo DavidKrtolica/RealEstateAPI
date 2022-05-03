@@ -36,7 +36,8 @@ export class User {
   roleId: Number;
 
   //RELATIONSHIP WITH EXISTING 'auth' ENTITY
-  @OneToOne(type => Auth, { cascade: true, onDelete: 'CASCADE' }) @JoinColumn({ name: 'auth_id' })
+  @OneToOne(type => Auth, { cascade: true, onDelete: 'CASCADE' }) 
+  @JoinColumn({ name: 'auth_id' })
   auth: Auth;
   //FOREIGN KEY COLUMN 'auth_id'
   @Column('int', { name: 'auth_id' })
