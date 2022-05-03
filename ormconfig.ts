@@ -1,9 +1,9 @@
 import 'dotenv/config';
 
 export default {
-    host: process.env.RDG_HOST,
-    port: Number(process.env.RDG_PORT),
-    user: process.env.RDG_USER,
-    password: process.env.RDG_PASSWORD,
-    schema: process.env.RDG_SCHEMA,
+    host: process.env.REAPI_HOST,
+    port: Number(process.env.REAPI_PORT),
+    user: process.env.REAPI_USER,
+    password: process.env.REAPI_PASSWORD,
+    schema: process.env.REAPI_SCHEMA,
 }

@@ -27,11 +27,11 @@ export class User {
   @Column('varchar', { length: 45, name: 'address' })
   address: string;
 
-  //FOREIGN KEY - RELATIONSHIP
+  //FOREIGN KEY - RELATIONSHIP (MISSING)
   @Column('int', { name: 'city_id' })
   cityId: Number;
 
-  //FOREIGN KEY - RELATIONSHIP
+  //FOREIGN KEY - RELATIONSHIP (MISSING)
   @Column('int', { name: 'role_id' })
   roleId: Number;
 
