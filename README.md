@@ -43,6 +43,10 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+# open in browser at: 
+-- http://localhost:3000/users --> read ALL users from the DB
+-- http://localhost:3000/auths --> read ALL auths from the DB
 ```
 
 ## Test (currently not implemented)
