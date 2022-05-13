@@ -3,7 +3,7 @@ import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn, PrimaryGeneratedCo
 @Entity('auth')
 export class Auth {
   @PrimaryGeneratedColumn({ name: 'auth_id' })
-  authId: Number;
+  authId: number;
 
   @Column('varchar', { length: 45, name: 'email' })
   email: string;

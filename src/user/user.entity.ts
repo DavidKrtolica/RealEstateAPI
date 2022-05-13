@@ -1,10 +1,11 @@
 import { Auth } from 'src/auth/auth.entity';
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { City } from 'src/city/city.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('user')
 export class User {
   @PrimaryGeneratedColumn({ name: 'user_id' })
-  userId: Number;
+  userId: number;
 
   @Column('varchar', { length: 45, name: 'first_name' })
   firstName: string;
@@ -27,13 +28,17 @@ export class User {
   @Column('varchar', { length: 45, name: 'address' })
   address: string;
 
-  //FOREIGN KEY - RELATIONSHIP (MISSING)
+  //RELATIONSHIP WITH 'city' ENTITY
+  @ManyToOne(type => City)
+  @JoinColumn({ name: 'city_id' })
+  city: City;
+  //FOREIGN KEY COLUMN 'city_id'
   @Column('int', { name: 'city_id' })
-  cityId: Number;
+  cityId: number;
 
   //FOREIGN KEY - RELATIONSHIP (MISSING)
   @Column('int', { name: 'role_id' })
-  roleId: Number;
+  roleId: number;
 
   //RELATIONSHIP WITH EXISTING 'auth' ENTITY
   @OneToOne(type => Auth, { cascade: true, onDelete: 'CASCADE' }) 
@@ -41,5 +46,5 @@ export class User {
   auth: Auth;
   //FOREIGN KEY COLUMN 'auth_id'
   @Column('int', { name: 'auth_id' })
-  authId: Number;
+  authId: number;
 }
