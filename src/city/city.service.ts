@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { InsertValuesMissingError, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { City } from './city.entity';
 
 @Injectable()

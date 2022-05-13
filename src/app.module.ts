@@ -13,6 +13,9 @@ import { AuthModule } from './auth/auth.module';
 import { City } from './city/city.entity';
 import { CityModule } from './city/city.module';
 
+import { Role } from './role/role.entity';
+import { RoleModule } from './role/role.module';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -22,12 +25,12 @@ import { CityModule } from './city/city.module';
       username: config.default.user,
       password: config.default.password,
       database: config.default.schema,
-      entities: [User, Auth, City], 
+      entities: [User, Auth, City, Role], 
       synchronize: true,
       dropSchema: false,
       keepConnectionAlive: true,
     }),
-    UserModule, AuthModule, CityModule
+    UserModule, AuthModule, CityModule, RoleModule
   ],
   controllers: [AppController],
   providers: [AppService],

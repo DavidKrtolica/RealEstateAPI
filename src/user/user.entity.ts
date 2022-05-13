@@ -1,5 +1,6 @@
 import { Auth } from 'src/auth/auth.entity';
 import { City } from 'src/city/city.entity';
+import { Role } from 'src/role/role.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('user')
@@ -28,7 +29,8 @@ export class User {
   @Column('varchar', { length: 45, name: 'address' })
   address: string;
 
-  //RELATIONSHIP WITH 'city' ENTITY
+  //RELATIONSHIP WITH 'city' ENTITY -- MANY TO ONE, AS
+  //ONE CITY CAN BELONG TO MUTIPLE USERS
   @ManyToOne(type => City)
   @JoinColumn({ name: 'city_id' })
   city: City;
@@ -36,11 +38,17 @@ export class User {
   @Column('int', { name: 'city_id' })
   cityId: number;
 
-  //FOREIGN KEY - RELATIONSHIP (MISSING)
+  //RELATIONSHIP WITH 'role' ENTITY -- MANY TO ONE, AS
+  //ONE ROLE CAN BELONG TO MUTIPLE USERS
+  @ManyToOne(type => Role)
+  @JoinColumn({ name: 'role_id' })
+  role: Role;
+  //FOREIGN KEY COLUMN 'role_id'
   @Column('int', { name: 'role_id' })
   roleId: number;
 
-  //RELATIONSHIP WITH EXISTING 'auth' ENTITY
+  //RELATIONSHIP WITH EXISTING 'auth' ENTITY -- ONE TO ONE, AS
+  //ONE USER CAN ONLY BE CONNECTED TO ONE AUTH 
   @OneToOne(type => Auth, { cascade: true, onDelete: 'CASCADE' }) 
   @JoinColumn({ name: 'auth_id' })
   auth: Auth;
