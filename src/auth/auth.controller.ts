@@ -10,11 +10,11 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   //GET ALL AUTH OBJECTS
-  /* @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Get('auths')
   async getAllAuths(): Promise<Auth[]> {
     return await this.authService.findAll();
-  } */
+  }
 
   //GET ONE AUTH BY ID
   /* @UseGuards(JwtAuthGuard)
@@ -48,6 +48,12 @@ export class AuthController {
 
   //////////////////////////////////// AUTHENTICATION ////////////////////////////////////////////////
 
+  //SIGNUP METHOD ENDPOINT
+  @Post('auths/signup')
+  async signup(@Body() signupRequest) {
+    return this.authService.signup(signupRequest);
+  }
+
   //LOGIN METHOD ENDPOINT
   @UseGuards(LocalAuthGuard)
   @Post('auths/login')
@@ -55,9 +61,10 @@ export class AuthController {
     return this.authService.login(req.user);
   }
 
-  //SIGNUP METHOD ENDPOINT
-  @Post('auths/signup')
-  async signup(@Body() signupRequest) {
-    return this.authService.signup(signupRequest);
+  //GET CURRENT LOGGED-IN AUTH OBJECT
+  @UseGuards(JwtAuthGuard)
+  @Get('auths/me')
+  async getCurrentAuth(@Request() req) {
+    return req.user;
   }
 }
