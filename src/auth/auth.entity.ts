@@ -5,9 +5,9 @@ export class Auth {
   @PrimaryGeneratedColumn({ name: 'auth_id' })
   authId: number;
 
-  @Column('varchar', { length: 45, name: 'email' })
+  @Column('varchar', { length: 60, name: 'email' })
   email: string;
 
-  @Column('varchar', { length: 45, name: 'password' })
+  @Column('varchar', { length: 255, name: 'password' })
   password: string; 
 }

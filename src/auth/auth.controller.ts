@@ -10,18 +10,18 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   //GET ALL AUTH OBJECTS
-  @UseGuards(JwtAuthGuard)
+  /* @UseGuards(JwtAuthGuard)
   @Get('auths')
   async getAllAuths(): Promise<Auth[]> {
     return await this.authService.findAll();
-  }
+  } */
 
   //GET ONE AUTH BY ID
-  @UseGuards(JwtAuthGuard)
+  /* @UseGuards(JwtAuthGuard)
   @Get('auths/:searchAuthId')
   async getAuthById(@Param('searchAuthId') searchAuthId: number): Promise<Auth> {
     return await this.authService.findOne(searchAuthId);
-  }
+  } */
 
   //DELETING AN EXISTING AUTH OBJECT BY ID
   @UseGuards(JwtAuthGuard)
@@ -31,11 +31,11 @@ export class AuthController {
   }
 
   //CREATING A COMPLETELY NEW AUTH OBJECT
-  @UseGuards(JwtAuthGuard)
+  /* @UseGuards(JwtAuthGuard)
   @Post('auths')
   async createAuth(@Body() authData: Auth): Promise<any> {
     return this.authService.create(authData);
-  }
+  } */
 
   //UPDATING AN ALREADY EXISTING AUTH
   @UseGuards(JwtAuthGuard)
@@ -53,5 +53,11 @@ export class AuthController {
   @Post('auths/login')
   async login(@Request() req) {
     return this.authService.login(req.user);
+  }
+
+  //SIGNUP METHOD ENDPOINT
+  @Post('auths/signup')
+  async signup(@Body() signupRequest) {
+    return this.authService.signup(signupRequest);
   }
 }
