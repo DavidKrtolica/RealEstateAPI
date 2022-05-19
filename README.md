@@ -45,8 +45,9 @@ $ npm run start:dev
 $ npm run start:prod
 
 # open in browser at: 
--- http://localhost:3000/auths/signup --> sign up by passing an email and password ({"email": "yourEmail", "password": "yourPassword"})
--- http://localhost:3000/auths/login --> login using the same credentials to get a JWT access token
+-- POST http://localhost:3000/auths/signup --> sign up by passing an email and password ({"email": "yourEmail", "password": "yourPassword"})
+-- POST http://localhost:3000/auths/login --> login using the same credentials to get a JWT access token (LocalAuthGuard protected)
+-- GET http://localhost:3000/auths/me --> get info about the current logged-in Auth object (JWTGuard protected, must pass JWT access token in header)
 ```
 
 ## Test (currently not implemented)
