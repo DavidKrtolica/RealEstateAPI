@@ -45,8 +45,8 @@ $ npm run start:dev
 $ npm run start:prod
 
 # open in browser at: 
--- http://localhost:3000/users --> read ALL users from the DB
--- http://localhost:3000/auths --> read ALL auths from the DB
+-- http://localhost:3000/auths/signup --> sign up by passing an email and password ({"email": "yourEmail", "password": "yourPassword"})
+-- http://localhost:3000/auths/login --> login using the same credentials to get a JWT access token
 ```
 
 ## Test (currently not implemented)
