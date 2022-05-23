@@ -19,6 +19,9 @@ import { RoleModule } from './role/role.module';
 
 import { EstateModule } from './estate/estate.module';
 
+import { Neo4jModule } from 'nest-neo4j';
+import { ReviewController } from './review/review.controller';
+
 @Module({
   imports: [
     //MYSQL ORM (MAPPING) MODULE
@@ -37,9 +40,17 @@ import { EstateModule } from './estate/estate.module';
     UserModule, AuthModule, CityModule, RoleModule,
     //MONGODB MAPPING/SCHEME MODULE
     MongooseModule.forRoot('mongodb://localhost/real_estate_DB'),
-    EstateModule
+    EstateModule,
+    //NEO4J INTEGRATION MODULE
+    Neo4jModule.forRoot({
+      scheme: 'neo4j',
+      host: 'localhost',
+      port: 7687,
+      username: 'neo4j',
+      password: 'test'
+    }),
   ],
-  controllers: [AppController],
+  controllers: [AppController, ReviewController],
   providers: [AppService],
 })
 export class AppModule {}
