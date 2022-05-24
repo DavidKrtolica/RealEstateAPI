@@ -1,26 +1,27 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { MongooseModule } from '@nestjs/mongoose';
-import * as config from '../ormconfig';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-
+// ALL IMPORTED DATABASE ORMs
+import { TypeOrmModule } from '@nestjs/typeorm';
+import * as config from '../ormconfig';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Neo4jModule } from 'nest-neo4j/dist';
+//USER IMPORTS - MYSQL
 import { User } from './user/user.entity';
 import { UserModule } from './user/user.module';
-
+//AUTH IMPORTS - MYSQL, AUTHENTICATION USING JWT AND BCRYPT
 import { Auth } from './auth/auth.entity';
 import { AuthModule } from './auth/auth.module';
-
+//CITY IMPORTS - MYSQL
 import { City } from './city/city.entity';
 import { CityModule } from './city/city.module';
-
+//ROLE IMPORTS - MYSQL
 import { Role } from './role/role.entity';
 import { RoleModule } from './role/role.module';
-
+//ESTATE IMPORTS - MONGODB, MISSING ROOMS ENTITY FOR RELATIONSHIP
 import { EstateModule } from './estate/estate.module';
-
-import { Neo4jModule } from 'nest-neo4j';
-import { ReviewController } from './review/review.controller';
+//REVIEW IMPORTS - NEO4J, MISSING MOCKED USER ENTITY FOR RELATIONSHIP
+import { ReviewModule } from './review/review.module';
 
 @Module({
   imports: [
@@ -49,8 +50,9 @@ import { ReviewController } from './review/review.controller';
       username: 'neo4j',
       password: 'test'
     }),
+    ReviewModule,
   ],
-  controllers: [AppController, ReviewController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
