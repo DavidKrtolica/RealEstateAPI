@@ -25,7 +25,7 @@ import { ReviewModule } from './review/review.module';
 
 @Module({
   imports: [
-    //MYSQL ORM (MAPPING) MODULE
+    //MYSQL ORM (MAPPING) MODULE - CLOUD HOSTED
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: config.default.host,
@@ -39,10 +39,10 @@ import { ReviewModule } from './review/review.module';
       keepConnectionAlive: true,
     }),
     UserModule, AuthModule, CityModule, RoleModule,
-    //MONGODB MAPPING/SCHEME MODULE
+    //MONGODB MAPPING/SCHEME MODULE - LOCALLY HOSTED
     MongooseModule.forRoot('mongodb://localhost/real_estate_DB'),
     EstateModule,
-    //NEO4J INTEGRATION MODULE
+    //NEO4J INTEGRATION MODULE - LOCAL HOSTED
     Neo4jModule.forRoot({
       scheme: 'neo4j',
       host: 'localhost',

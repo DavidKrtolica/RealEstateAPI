@@ -1,4 +1,5 @@
-import { Controller, Get, Param, Post, Put, Delete, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Put, Delete, Body, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
@@ -19,18 +20,24 @@ export class UserController {
   }
 
   //DELETE A USER BY ID
+  //PROTECTED - NEED TO PASS JWT TOKEN
+  @UseGuards(JwtAuthGuard)
   @Delete('users/:deleteId')
   async deleteUserById(@Param('deleteId') deleteId: number): Promise<any> {
     return await this.userService.delete(deleteId);
   }
 
   //CREATING A COMPLETELY NEW USER
+  //PROTECTED - NEED TO PASS JWT TOKEN
+  @UseGuards(JwtAuthGuard)
   @Post('users')
   async createUser(@Body() userData: User): Promise<any> {
     return this.userService.create(userData);
   }
 
   //UPDATING AN ALREADY EXISTING USER
+  //PROTECTED - NEED TO PASS JWT TOKEN
+  @UseGuards(JwtAuthGuard)
   @Put('users/:updateId')
   async updateUser(@Param('updateId') updateUserId, @Body() userData: User): Promise<any> {
     userData.userId = Number(updateUserId);

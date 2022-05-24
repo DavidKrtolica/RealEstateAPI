@@ -13,6 +13,8 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
+  ///////////////////////// SIMPLE CRUD OPERATIONS /////////////////////////////////////////////////
+
   async findAll(): Promise<Auth[]> {
     return await this.authRepository.find();
   }
@@ -35,6 +37,7 @@ export class AuthService {
 
   /////////////////////////////// AUTHENTICATION ///////////////////////////////////////////////////
 
+  //CHECKS IF THE AUTH OBJECT PASSED IN LOGIN HAS CORRECT EMAIL AND PASSWORD,  RETURNS AUTH OBJECT 
   async validateAuth(emailInput: string, passwordInput: string): Promise<any> {
     const auth = await this.authRepository.findOne({ where: { email: emailInput } });
     const passwordsMatch = await this.compareHashes(passwordInput, auth.password);
@@ -45,6 +48,7 @@ export class AuthService {
     }
   }
 
+  //LOGIN METHOD WHICH AFTER AUTH VERIFICATION RETURNS THE ACCESS TOKEN FOR OTHER ENDPOINTS
   async login(auth: any) {
     const payload = { email: auth.email, sub: auth.authId };
     return {
@@ -52,6 +56,7 @@ export class AuthService {
     };
   }
 
+  //METHOD FOR CREATING A NEW AUTH OBJECT, SAVES THE EMAIL AND HASHED PASSWORD IN THE MYSQL DB
   async signup(auth: any) {
     if ((await this.authRepository.findOne({ where: { email: auth.email } })) !== undefined) {
       throw new BadRequestException(
@@ -65,11 +70,13 @@ export class AuthService {
     }
   }
 
+  //FUNCTION FOR HASHING/ENCODING THE PASSWORD
   async encodePassword(password: string): Promise<string> {
     const saltOrRounds = 10;
     return await bcrypt.hash(password, saltOrRounds);
   }
 
+  //FUNCTION FOR COMPARING THE PLAINTEXT PASSWORD WITH THE SAVED HASHED PASSWORD
   async compareHashes(password: string, hash: string): Promise<boolean> {
     return await bcrypt.compare(password, hash);
   }
