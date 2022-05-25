@@ -79,13 +79,32 @@ export class ReviewService {
     }
 
     async createReview(newReviewInput: any): Promise<any> {
-        //SIMPLE NEO4J CREATE QUERY TO MAKE A NEW NODE AND 
+        //SIMPLE NEO4J CREATE QUERY/CYPHER TO MAKE A NEW NODE AND 
         //ASSINING PASSED BODY/JSON OBJECT PROPERTIES TO THE NODE PROPS
         const newReview = await this.neo4jService.write(
             `CREATE (n: Review{ stars: ${newReviewInput.stars}, 
                                 comment: "${newReviewInput.comment}", 
                                 estateId: ${newReviewInput.estateId}})`
         );
-        return `Successfully created a new Review for following estate ID: ${newReviewInput.estateId} !`;
+        if (newReview != null || newReview != undefined) {
+            return `Successfully created a new Review for following estate ID: ${newReviewInput.estateId} !`;
+        } else {
+            return 'There has been an error while creating a new Review!';
+        }
+    }
+
+    async deleteReviewByEstateId(deleteReviewEstateId: number): Promise<any> {
+        //SIMPLE NEO4J QUERY/CYPHER TO FIND A NODE WITH PROPERTY ESTATEID OF VALUE 4 AND DELETE
+        const deleteReview = await this.neo4jService.write(
+            `MATCH (n) WHERE (n.estateId = ${deleteReviewEstateId}) DELETE (n)`
+        );
+        //TO BE ABLE TO DO ERROR HANDLING, CHECKING IF "CONTAINSUPDATE" BOOLEAN
+        //EXISTS ON THE RETURNED JSON SUMMARY OBJECT
+        const wasUpdated = deleteReview.summary.updateStatistics;
+        if ("_containsUpdates" in wasUpdated) {
+            return `Successfully delete a Review for following estate ID: ${deleteReviewEstateId} !`;
+        } else {
+            return `There has been an error while deleting the Review with following estate ID: ${deleteReviewEstateId} !`;
+        }
     }
 }

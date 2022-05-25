@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ReviewService } from './review.service';
 
 @Controller()
@@ -21,5 +21,11 @@ export class ReviewController {
   @Post('reviews')
   async createNewReview(@Body() inputReview: any): Promise<any> {
     return await this.reviewService.createReview(inputReview);
+  }
+
+  //DELETE AN EXISTING REVIEW BY ESTATE ID
+  @Delete('reviews/:deleteByEstateId')
+  async deleteReview(@Param('deleteByEstateId') deleteByEstateId: number): Promise<any> {
+    return await this.reviewService.deleteReviewByEstateId(deleteByEstateId);
   }
 }
