@@ -2,10 +2,19 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Req, UseGuards } from 
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Estate } from './estate.schema';
 import { EstateService } from './estate.service';
+import * as estateArrayConstants from './estates.json';
 
 @Controller()
 export class EstateController {
   constructor(private estateService: EstateService) {}
+
+  //GET METHOD WHICH TAKES ESTATE TEST DATA ARRAY
+  //AND AUTOMATICALLY POPULATES THE DATABASE 
+  @Get('estatesPopulatingDb')
+  async populateDatabase(): Promise<any> {
+    await this.estateService.seedingManyEstates(estateArrayConstants);
+    return 'Successfully populated the database with estate test data!';
+  }
 
   //GET ALL ESTATES 
   @Get('estates')
@@ -25,6 +34,14 @@ export class EstateController {
   @Post('estates')
   async createNewEstate(@Body() estateInput: any): Promise<any> {
     return await this.estateService.insertEstate(estateInput);
+  }
+
+  //CREATE MANY NEW ESTATES POST METHOD (MANUAL)
+  //PROTECTED - NEED TO PASS JWT TOKEN
+  //@UseGuards(JwtAuthGuard)
+  @Post('estatesMany')
+  async createManyEstates(@Body() estateArrayInput: any[]): Promise<any> {
+    return await this.estateService.seedingManyEstates(estateArrayInput);
   }
 
   //DELETE ONE ESTATE BY ID

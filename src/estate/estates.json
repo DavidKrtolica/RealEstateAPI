@@ -1,0 +1,45 @@
+[{
+    "estateId": 3,
+    "city": "Crikvenica",
+    "estateAddress": "Crikveničkva 87C",
+    "estateType": "House",
+    "estateSize": "205m2",
+    "rooms": 5,
+    "ownerId": 68,
+    "targetPrice": "300.000e",
+    "forRent": false,
+    "forSale": true
+  },{
+    "estateId": 2,
+    "city": "Zagreb",
+    "estateAddress": "Vukovarska 37B",
+    "estateType": "Penthouse",
+    "estateSize": "145m2",
+    "rooms": 3,
+    "ownerId": 63,
+    "targetPrice": "200.000e",
+    "forRent": false,
+    "forSale": true
+  },{
+    "estateId": 1,
+    "city": "Rijeka",
+    "estateAddress": "Matuljska 82B",
+    "estateType": "Apartment",
+    "estateSize": "65m2",
+    "rooms": 3,
+    "ownerId": 62,
+    "targetPrice": "120.000e",
+    "forRent": false,
+    "forSale": true
+  },{
+    "estateId": 4,
+    "city": "Osijek",
+    "estateAddress": "Baranja 44",
+    "estateType": "Luxury Apartment",
+    "estateSize": "85m2",
+    "rooms": 3,
+    "ownerId": 66,
+    "targetPrice": "175.000e",
+    "forRent": false,
+    "forSale": true
+  }]

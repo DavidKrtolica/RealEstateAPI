@@ -15,6 +15,7 @@ export class EstateService {
       return this.estateModel.findOne({ estateId: searchEstateId }).exec();
   }
 
+  //INSERTS ONLY ONE ESTATE INTO THE DATABASE
   async insertEstate(estate: any) {
     const newEstate = new this.estateModel({
       estateId: estate.estateId,
@@ -32,10 +33,29 @@ export class EstateService {
     return result;
   }
 
-  async deleteAnEstateByEstateId(deleteEstateId: number): Promise<any> {
-    return this.estateModel.deleteOne({ estateId: deleteEstateId }).exec();
+  //PARAMETERISED INSERTION OF ESTATES INTO THE DATABASE,
+  //PASS ANY ARRAY OF ESTATE OBJECTS AS PARAMETER
+  async seedingManyEstates(estateArr: any[]) {
+    estateArr.forEach(async estate => {
+      const newEstate = new this.estateModel({
+        estateId: estate.estateId,
+        city: estate.city,
+        estateAddress: estate.estateAddress,
+        estateType: estate.estateType,
+        estateSize: estate.estateSize,
+        rooms: estate.rooms,
+        ownerId: estate.ownerId,
+        targetPrice: estate.targetPrice,
+        forRent: estate.forRent,
+        forSale: estate.forSale
+      });
+      const result = await newEstate.save();
+    });
+    return `Successfully added an array of estates!`;
   }
 
+  //UPDATE METHOD FOR ESTATE, FIRST FINDS AN ESTATE AND THEN UPDATES
+  //IF ANY PROPERTY VALUES HAVE CHANGED
   async updateEstateById(searchId: number, updatedEstate: any) {
     const estate = await this.estateModel.findOne({ estateId: searchId }).exec();
     if (updatedEstate.city) {
@@ -67,5 +87,9 @@ export class EstateService {
     }
     estate.save();
     return `Successfully updated Estate with ID: ${estate.estateId} at address ${estate.estateAddress} !`
+  }
+
+  async deleteAnEstateByEstateId(deleteEstateId: number): Promise<any> {
+    return this.estateModel.deleteOne({ estateId: deleteEstateId }).exec();
   }
 }
