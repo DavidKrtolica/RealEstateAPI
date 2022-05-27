@@ -9,6 +9,17 @@ export class ReviewService {
         private estateService: EstateService
     ) {}
 
+    //AUTOMATIC POPULATION OF THE NEO4J DATABSE
+    async populateNeo4jDb(): Promise<any> {
+        //4 PREDEFINED NEO4J QUERIES WHICH CREATE 4 NODES OF SAME TYPE - POPULATING WITH TEST DATA CONSTANTS
+        //EXECUTION OF THESE 4 WRITE FUNCTIONS TAKES A LITTLE WHILE SO BE PATIENT :-)
+        await this.neo4jService.write('CREATE (n: Review{stars: 4, comment: "Very pretty, amazing backyard!", estateId: 3})');
+        await this.neo4jService.write('CREATE (n: Review{stars: 5, comment: "Amazing estate!", estateId: 2})');
+        await this.neo4jService.write('CREATE (n: Review{stars: 5, comment: "Simply beautiful, mesmerizing sea view!", estateId: 1})');
+        await this.neo4jService.write('CREATE (n: Review{stars: 4, comment: "Lovely house owners and beautiful nature surroundings!", estateId: 4})');
+        return 'Successfully created 4 Review nodes in the database!';
+    }
+
     async findAll(): Promise<any> {
         //QUERIES TO THE NEO4J DATABASE
         const resComments = await this.neo4jService.read(`MATCH (n) RETURN (n.comment)`);

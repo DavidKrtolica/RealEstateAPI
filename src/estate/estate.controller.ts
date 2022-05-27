@@ -9,7 +9,9 @@ export class EstateController {
   constructor(private estateService: EstateService) {}
 
   //GET METHOD WHICH TAKES ESTATE TEST DATA ARRAY
-  //AND AUTOMATICALLY POPULATES THE DATABASE 
+  //AND AUTOMATICALLY POPULATES THE DATABASE
+  //PROTECTED - NEED TO PASS JWT TOKEN
+  @UseGuards(JwtAuthGuard) 
   @Get('estatesPopulatingDb')
   async populateDatabase(): Promise<any> {
     await this.estateService.seedingManyEstates(estateArrayConstants);
@@ -38,7 +40,7 @@ export class EstateController {
 
   //CREATE MANY NEW ESTATES POST METHOD (MANUAL)
   //PROTECTED - NEED TO PASS JWT TOKEN
-  //@UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Post('estatesMany')
   async createManyEstates(@Body() estateArrayInput: any[]): Promise<any> {
     return await this.estateService.seedingManyEstates(estateArrayInput);
