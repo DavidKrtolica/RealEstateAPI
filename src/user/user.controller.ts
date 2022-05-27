@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Put, Delete, Body, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Post, Put, Delete, Body, UseGuards, Query } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { User } from './user.entity';
 import { UserService } from './user.service';
@@ -17,6 +17,12 @@ export class UserController {
   @Get('users/:searchId')
   async getUserById(@Param('searchId') searchId: number): Promise<User> {
     return await this.userService.findOne(searchId);
+  }
+
+  //GET ONE USER BY FIRST NAME - QUERY PARAMETER
+  @Get('usersByName')
+  async getUsersByName(@Query('firstName') queryFirstName: string): Promise<User[]> {
+    return await this.userService.findByFirstName(queryFirstName);
   }
 
   //DELETE A USER BY ID

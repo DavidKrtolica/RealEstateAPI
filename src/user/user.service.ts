@@ -18,6 +18,10 @@ export class UserService {
     return await this.userRepository.findOne({ where: { userId: searchId } });
   }
 
+  async findByFirstName(searchName: string): Promise<User[]> {
+    return await this.userRepository.find({ where: { firstName: searchName} });
+  }
+
   async delete(byId: number): Promise<DeleteResult> {
     return await this.userRepository.delete(byId);
   }
