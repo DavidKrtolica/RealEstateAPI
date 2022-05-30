@@ -28,11 +28,11 @@
 
 ## Installation
 
-```bash
-
 !! IMPORTANT !!
 
 -- BEFORE RUNNING THE APP, READ THE FOLLOWING <a href="https://docs.google.com/document/d/1paQW72Rs9a2YRtt_gCk4kwGPICzfUJ3I05_tcgbpxNA/edit?usp=sharing" target="_blank">INSTALLATION DOCUMENT</a> -- 
+
+```bash
 
 $ npm install
 ```
