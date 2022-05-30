@@ -35,6 +35,11 @@ $ npm install
 ## Running the app
 
 ```bash
+!! IMPORTANT !!
+
+-- BEFORE RUNNING THE APP, READ THE FOLLOWING DOCUMENT --
+https://docs.google.com/document/d/1paQW72Rs9a2YRtt_gCk4kwGPICzfUJ3I05_tcgbpxNA/edit?usp=sharing 
+
 # development
 $ npm run start
 
