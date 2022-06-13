@@ -32,7 +32,7 @@ export class EstateController {
 
   //CREATE A NEW ESTATE POST METHOD
   //PROTECTED - NEED TO PASS JWT TOKEN
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Post('estates')
   async createNewEstate(@Body() estateInput: any): Promise<any> {
     return await this.estateService.insertEstate(estateInput);

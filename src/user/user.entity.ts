@@ -31,7 +31,7 @@ export class User {
 
   //RELATIONSHIP WITH 'city' ENTITY -- MANY TO ONE, AS
   //ONE CITY CAN BELONG TO MUTIPLE USERS
-  @ManyToOne(type => City)
+  @ManyToOne(type => City, { onDelete: 'RESTRICT' })
   @JoinColumn({ name: 'city_id' })
   city: City;
   //FOREIGN KEY COLUMN 'city_id'
@@ -40,7 +40,7 @@ export class User {
 
   //RELATIONSHIP WITH 'role' ENTITY -- MANY TO ONE, AS
   //ONE ROLE CAN BELONG TO MUTIPLE USERS
-  @ManyToOne(type => Role)
+  @ManyToOne(type => Role, { onDelete: 'RESTRICT' })
   @JoinColumn({ name: 'role_id' })
   role: Role;
   //FOREIGN KEY COLUMN 'role_id'

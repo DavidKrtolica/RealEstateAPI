@@ -2,10 +2,14 @@ import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Estate, EstateDocument } from './estate.schema';
+import { PanoramaService } from 'src/panorama/panorama.service';
 
 @Injectable()
 export class EstateService {
-  constructor(@InjectModel(Estate.name) private estateModel: Model<EstateDocument>) {}
+  constructor(
+    @InjectModel(Estate.name) private estateModel: Model<EstateDocument>,
+    private panoramaService: PanoramaService
+  ) {}
 
   async findAll(): Promise<Estate[]> {
     return this.estateModel.find().exec();
@@ -17,6 +21,8 @@ export class EstateService {
 
   //INSERTS ONLY ONE ESTATE INTO THE DATABASE
   async insertEstate(estate: any) {
+    const panoramaObject = await this.panoramaService.findOne(estate.panoramaId);
+    //console.log(panoramaObject);
     const newEstate = new this.estateModel({
       estateId: estate.estateId,
       city: estate.city,
@@ -27,7 +33,8 @@ export class EstateService {
       ownerId: estate.ownerId,
       targetPrice: estate.targetPrice,
       forRent: estate.forRent,
-      forSale: estate.forSale
+      forSale: estate.forSale,
+      panorama: panoramaObject
     });
     const result = await newEstate.save();
     return result;

@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { Panorama } from 'src/panorama/panorama.schema';
 
 export type EstateDocument = Estate & Document;
 
@@ -34,6 +35,9 @@ export class Estate {
 
   @Prop({ required: true })
   forSale: boolean;
+
+  @Prop({ required: false })
+  panorama?: Panorama;
 }
 
 export const EstateSchema = SchemaFactory.createForClass(Estate);
